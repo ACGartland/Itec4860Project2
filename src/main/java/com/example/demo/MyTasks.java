@@ -38,18 +38,18 @@ public class MyTasks {
         }
     }
 
-//    @Scheduled(cron = "1/5 * * * * *")
-//    public void updateVehicle(){
-//        int updateVehicleId = RandomUtils.nextInt(1, 100);
-//        String url = "http://localhost:8080/updateVehicle";
-//        Vehicle newVehicle = new Vehicle(updateVehicleId, "Updated", 1500, 00000);
-//
-//        Vehicle vehicle = restTemplate.getForObject("http://localhost:8080/getVehicle/" + updateVehicleId, Vehicle.class);
-//        if(vehicle != null) {
-//            restTemplate.put(url, newVehicle, Vehicle.class);
-//            System.out.println("Updated " + updateVehicleId);
-//        }
-//
-//    }
+    @Scheduled(cron = "1/5 * * * * *")
+    public void updateVehicle(){
+        int updateVehicleId = RandomUtils.nextInt(1, 100);
+        String url = "http://localhost:8080/updateVehicle";
+        Vehicle newVehicle = new Vehicle(updateVehicleId, "Updated", 1500, 00000);
+
+        Vehicle vehicle = restTemplate.getForObject("http://localhost:8080/getVehicle/" + updateVehicleId, Vehicle.class);
+        if(vehicle != null) {
+            restTemplate.put(url, newVehicle, Vehicle.class);
+            System.out.println("Updated " + updateVehicleId);
+        }
+
+    }
 
 }
