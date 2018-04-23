@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 public class MyTasks {
     RestTemplate restTemplate = new RestTemplate();
 
-    private int id = 1;
     private String makeModel;
     private int year;
     private double retailPrice;
@@ -20,7 +19,7 @@ public class MyTasks {
         makeModel = RandomStringUtils.randomAlphabetic(15);
         year = RandomUtils.nextInt(1986, 2018);
         retailPrice = RandomUtils.nextInt(15000, 45000);
-        Vehicle newVehicle = new Vehicle(id++, makeModel, year, retailPrice);
+        Vehicle newVehicle = new Vehicle(0, makeModel, year, retailPrice);
 
         String url = "http://localhost:8080/addVehicle";
         restTemplate.postForObject(url, newVehicle, Vehicle.class);
@@ -39,18 +38,18 @@ public class MyTasks {
         }
     }
 
-    @Scheduled(cron = "1/5 * * * * *")
-    public void updateVehicle(){
-        int updateVehicleId = RandomUtils.nextInt(1, 100);
-        String url = "http://localhost:8080/updateVehicle";
-        Vehicle newVehicle = new Vehicle(updateVehicleId, "Updated", 1500, 00000);
-
-        Vehicle vehicle = restTemplate.getForObject("http://localhost:8080/getVehicle/" + updateVehicleId, Vehicle.class);
-        if(vehicle != null) {
-            restTemplate.put(url, newVehicle, Vehicle.class);
-            System.out.println("Updated " + updateVehicleId);
-        }
-
-    }
+//    @Scheduled(cron = "1/5 * * * * *")
+//    public void updateVehicle(){
+//        int updateVehicleId = RandomUtils.nextInt(1, 100);
+//        String url = "http://localhost:8080/updateVehicle";
+//        Vehicle newVehicle = new Vehicle(updateVehicleId, "Updated", 1500, 00000);
+//
+//        Vehicle vehicle = restTemplate.getForObject("http://localhost:8080/getVehicle/" + updateVehicleId, Vehicle.class);
+//        if(vehicle != null) {
+//            restTemplate.put(url, newVehicle, Vehicle.class);
+//            System.out.println("Updated " + updateVehicleId);
+//        }
+//
+//    }
 
 }
